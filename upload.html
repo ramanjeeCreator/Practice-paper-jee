@@ -1,81 +1,232 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Upload</title>
-<style>
-body{
-    font-family:Arial,sans-serif;
-    background:#0f172a;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-.card{
-    width:420px;
-    background:#1e293b;
-    padding:20px;
-    border-radius:16px;
-}
-input,button{
-    width:100%;
-    margin-top:10px;
-    padding:10px;
-}
-.progress{
-    height:20px;
-    background:#334155;
-    border-radius:10px;
-    overflow:hidden;
-    margin-top:15px;
-}
-.bar{
-    height:100%;
-    width:0%;
-    background:#22c55e;
-}
-.note{
-    margin-top:10px;
-    font-size:12px;
-    color:#94a3b8;
-}
-</style>
-</head>
-<body><div class="card">
-    <h2>Contribute your Study Material</h2><input type="file" id="file">
-<input type="url" placeholder="Paste URL (optional)">
-<button onclick="startUpload()">Upload</button>
-
-<div class="progress">
-    <div class="bar" id="bar"></div>
-</div>
-
-<p id="status">Waiting...</p>
-
-<div class="note">
-        Thank you for contributing your study material here 🙂.        </div>
-
-</div><script>
-function startUpload(){
-    let p=0;
-    let size=(Math.random()*495+5).toFixed(0);
-
-    document.getElementById("status").innerText=
-    "Preparing " + size + " MB file...";
-
-    let timer=setInterval(()=>{
-        p+=Math.random()*4;
-
-        if(p>=100){
-            p=100;
-            clearInterval(timer);
-            document.getElementById("status").innerText=
-            "Simulation Complete";
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document Upload</title
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --success-color: #10b981;
+            --bg-color: #f3f4f6;
         }
 
-        document.getElementById("bar").style.width=p+"%";
-    },150);
-}
-</script></body>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .upload-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Styling the actual file picker button zone */
+        input[type="file"] {
+            width: 100%;
+            padding: 1rem;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            cursor: pointer;
+            box-sizing: border-box;
+            background: #f8fafc;
+        }
+
+        input[type="file"]:hover {
+            border-color: var(--primary-color);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #4338ca;
+        }
+
+        button:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        /* --- Big Progress Bar Styles --- */
+        .progress-wrapper {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 35px; /* Big, noticeable height */
+            background-color: #e2e8f0;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary-color), #818cf8);
+            border-radius: 50px;
+            transition: width 0.1s linear;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        #file-info {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        /* --- Success Message --- */
+        #success-message {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #ecfdf5;
+            color: var(--success-color);
+            border: 1px solid #a7f3d0;
+            border-radius: 6px;
+            font-weight: 600;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="upload-container">
+        <h2>Upload Your File</h2>
+        
+        <form id="upload-form">
+            <div class="file-input-wrapper">
+                <input type="file" id="file-selector" required>
+                <div id="file-info"></div>
+            </div>
+            <button type="submit" id="upload-btn">Start Upload</button>
+        </form>
+
+        <div class="progress-wrapper" id="progress-wrapper">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar">0%</div>
+            </div>
+        </div>
+
+        <div id="success-message">🎉 Upload Successful!</div>
+    </div>
+
+    <script>
+        const uploadForm = document.getElementById('upload-form');
+        const fileSelector = document.getElementById('file-selector');
+        const uploadBtn = document.getElementById('upload-btn');
+        const progressWrapper = document.getElementById('progress-wrapper');
+        const progressBar = document.getElementById('progress-bar');
+        const successMessage = document.getElementById('success-message');
+        const fileInfo = document.getElementById('file-info');
+
+        // Display file size when selected
+        fileSelector.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+                fileInfo.textContent = `Size: ${sizeInMB} MB`;
+            } else {
+                fileInfo.textContent = '';
+            }
+            // Reset views if a new file is chosen
+            progressWrapper.style.display = 'none';
+            successMessage.style.display = 'none';
+            progressBar.style.width = '0%';
+            progressBar.textContent = '0%';
+        });
+
+        uploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const file = fileSelector.files[0];
+            if (!file) return;
+
+            // Hide previous success state and disable button
+            successMessage.style.display = 'none';
+            uploadBtn.disabled = true;
+            progressWrapper.style.display = 'block';
+
+            // Calculate size in MB
+            const fileSizeInMB = file.size / (1024 * 1024);
+            
+            /* Calculate dynamic duration logic:
+              - A 10MB file should take roughly 1.5 seconds (1500ms).
+              - We can scale linearly based on that ratio: (1500ms / 10MB) = 150ms per MB.
+              - Set a sensible minimum duration of 500ms for tiny files so the bar is always visible.
+            */
+            const msPerMB = 150; 
+            const totalDuration = Math.max(500, fileSizeInMB * msPerMB); 
+
+            let currentProgress = 0;
+            const intervalTime = 50; // Update bar visual every 50ms
+            const increments = 100 / (totalDuration / intervalTime);
+
+            const uploadSimulation = setInterval(() => {
+                currentProgress += increments;
+                
+                if (currentProgress >= 100) {
+                    currentProgress = 100;
+                    clearInterval(uploadSimulation);
+                    
+                    // Trigger completion states
+                    progressBar.style.width = '100%';
+                    progressBar.textContent = '100%';
+                    progressBar.style.background = 'var(--success-color)';
+                    
+                    setTimeout(() => {
+                        successMessage.style.display = 'block';
+                        uploadBtn.disabled = false;
+                    }, 200);
+                } else {
+                    progressBar.style.width = `${Math.floor(currentProgress)}%`;
+                    progressBar.textContent = `${Math.floor(currentProgress)}%`;
+                }
+            }, intervalTime);
+        });
+    </script>
+</body>
 </html>
