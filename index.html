@@ -67,155 +67,166 @@
         &copy; 2026 AllInOne Practice Set. All rights reserved.
     </footer>
 
-    <script>
-        // Sample JSON data structured exactly as requested
-        const practiceData = [
-            { "Input": "Electrostatics - Practice Paper 1", "Link": "https://drive.google.com/file/d/1CgZNixFKpbE9Pxjy5ZzVc7pyg4G3UGMb/view?usp=drivesdk" },
-            {"Input": "Solution last 5 year PYQs", "Link": "https://drive.google.com/file/d/1eaGnvtJLfS538uDmJ8it5eqo5pScfBu_/view?usp=drivesdk"},
-            {"Input": "Capacitor Basics practice set", "Link": "https://drive.google.com/file/d/18bWldCRIMrptWiJEExoRSNpZGn1XFs3w/view?usp=drivesdk"},
-            {"Input": "Ionic Equilibrium - last 5 year pyqs", "Link": "https://drive.google.com/file/d/1JOAHMrf-hmgOMI084-1ybqoQLiogcT6b/view?usp=drivesdk"},
-            {"Input": "Mole concept 5 year pyq", "Link": "https://drive.google.com/file/d/1bxp-fl239PgZccK1q7t89N8ugTi14xm-/view?usp=drivesdk"},
-            {"Input": "Current Electricity - last 5 year pyqs", "Link": "https://drive.google.com/file/d/1tkJYCDOX7SboLR08Vg18oj4wBGazXP--/view?usp=drivesdk"},
-            {"Input": "Capacitor practice set 2", "Link": "https://drive.google.com/file/d/1K5Vg4yx76Aa3AetgZT8_If8_I1MoZa-l/view?usp=drivesdk"},
-            {"Input": "Capacitor pyq part 1", "Link": "https://drive.google.com/file/d/1pBHvD0YBix3YRoT9Yr6JcLcCl-aH909v/view?usp=drivesdk"},
-            {"Input": "Capacitor VMC level 1 Dts 3", "Link": "https://drive.google.com/file/d/1GaHtgZ9CSMpWAUYEODOyFINtSbGQU1iM/view?usp=drivesdk"},
-            {"Input": "Capacitor Practice paper 2", "Link": "https://drive.google.com/file/d/1ViojOeWNryIqwoBnKGzDdYhB6iOXVrSO/view?usp=drivesdk"},
-            {"Input": "Complete 11th Practice Paper", "Link": "https://drive.google.com/file/d/1uKdEV_lll51RW_DfOhcZ9vgdENKua3I5/view?usp=drivesdk"},
-            {"Input": "N Avasthi", "Link": "https://drive.google.com/file/d/143I6Qna7mCu0GKhIcTkROKL2qlRgPzGZ/view?usp=drivesdk"},
-            {"Input": "Thermodynamics", "Link": "https://drive.google.com/file/d/1--DjNvwh9K4_IQVa3fXYyuHcYxzB_JA9/view?usp=drivesdk"},
+   <script>
+    // 1. Paste your Google Sheet ID here (between the quotes)
+    const SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE';
 
+    // Static fallback data (kept intact so your site won't break if offline)
+    const staticData = [
+        { "Input": "Electrostatics - Practice Paper 1", "Link": "https://drive.google.com/file/d/1CgZNixFKpbE9Pxjy5ZzVc7pyg4G3UGMb/view?usp=drivesdk" },
+        { "Input": "Solution last 5 year PYQs", "Link": "https://drive.google.com/file/d/1eaGnvtJLfS538uDmJ8it5eqo5pScfBu_/view?usp=drivesdk" },
+        { "Input": "Capacitor Basics practice set", "Link": "https://drive.google.com/file/d/18bWldCRIMrptWiJEExoRSNpZGn1XFs3w/view?usp=drivesdk" },
+        { "Input": "Ionic Equilibrium - last 5 year pyqs", "Link": "https://drive.google.com/file/d/1JOAHMrf-hmgOMI084-1ybqoQLiogcT6b/view?usp=drivesdk" },
+        { "Input": "Mole concept 5 year pyq", "Link": "https://drive.google.com/file/d/1bxp-fl239PgZccK1q7t89N8ugTi14xm-/view?usp=drivesdk" },
+        { "Input": "Current Electricity - last 5 year pyqs", "Link": "https://drive.google.com/file/d/1tkJYCDOX7SboLR08Vg18oj4wBGazXP--/view?usp=drivesdk" },
+        { "Input": "Capacitor practice set 2", "Link": "https://drive.google.com/file/d/1K5Vg4yx76Aa3AetgZT8_If8_I1MoZa-l/view?usp=drivesdk" },
+        { "Input": "Capacitor pyq part 1", "Link": "https://drive.google.com/file/d/1pBHvD0YBix3YRoT9Yr6JcLcCl-aH909v/view?usp=drivesdk" },
+        { "Input": "Capacitor VMC level 1 Dts 3", "Link": "https://drive.google.com/file/d/1GaHtgZ9CSMpWAUYEODOyFINtSbGQU1iM/view?usp=drivesdk" },
+        { "Input": "Capacitor Practice paper 2", "Link": "https://drive.google.com/file/d/1ViojOeWNryIqwoBnKGzDdYhB6iOXVrSO/view?usp=drivesdk" },
+        { "Input": "Complete 11th Practice Paper", "Link": "https://drive.google.com/file/d/1uKdEV_lll51RW_DfOhcZ9vgdENKua3I5/view?usp=drivesdk" },
+        { "Input": "N Avasthi", "Link": "https://drive.google.com/file/d/143I6Qna7mCu0GKhIcTkROKL2qlRgPzGZ/view?usp=drivesdk" },
 
+        // PHYSICS
+        { "Input": "Physics: Electrostatics - Level 1 Practice Sheet", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
+        { "Input": "Physics: Electrostatics - HC Verma Chapterwise Solutions", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Physics: Kinematics & Mechanics - Complete Revision Module", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Physics: Unit & Dimensions - Past Year Practice Set", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
+        { "Input": "Physics: Magnetism & EMI - Multi-Concept Advanced Problems", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Physics: Thermodynamics - Daily Practice Paper (DPP)", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
 
+        // CHEMISTRY
+        { "Input": "Chemistry: Chemical Bonding & Molecular Structure - Sheet 1", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Chemistry: Periodic Table & Representative Elements - Revision Guide", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Chemistry: Mole Concept & Gaseous State - Mock Paper", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
+        { "Input": "Chemistry: Coordination Compounds & d-Block - Advanced DPP", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
+        { "Input": "Chemistry: Organic Chemistry Hydrocarbons - Practice Module", "Link": "https://www.vedantu.com/jee-main/study-material" },
 
+        // MATHEMATICS
+        { "Input": "Mathematics: Sets, Relations & Functions - JEE Main PYQ Tracker", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
+        { "Input": "Mathematics: Quadratic Equations & Complex Numbers - Level 2", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Mathematics: Limits, Continuity & Differentiability - Complete Notes", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Mathematics: Integral Calculus (Definite & Indefinite) - Advanced Sheet", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
+        { "Input": "Mathematics: Vectors & 3D Geometry - High-Yield Solved Problems", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Mathematics: Probability & Matrices - Yearwise Exam Practice", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
+
+        // Mega JEE Preparation Dataset
+        { "Input": "Maths: [Mathongo Official] Matrices & Determinants - Chapterwise PYQ Sheet PDF", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Maths: [Mathongo Official] Quadratic Equations - Yearwise Past Year Questions", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Maths: [Mathongo Official] Sequences & Series - High Yield JEE Main PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Maths: [Mathongo Official] Complex Numbers - JEE Advanced Level Practice Set", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
+        { "Input": "Maths: [Mathongo Official] Limits, Continuity & Differentiability - Chapterwise PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Maths: [Mathongo Official] Definite Integration & Area Under Curve - Advanced Sheet", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
+        { "Input": "Maths: [Mathongo Official] Vectors & 3D Geometry - Most Repeated PYQs Pack", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Maths: [Mathongo Official] Probability & Statistics - Formulas & PYQ Guide", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Maths: [Allen Material] Coordinate Geometry (Straight Lines & Circles) - Modules & Exercises", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Maths: [Resonance Material] Permutations & Combinations - Rank Booster Question Bank", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+
+        { "Input": "Physics: [Physics Wallah / PW] Electrostatics - Complete Notes & Daily Practice Paper (DPP)", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Physics: [Allen Material] Current Electricity & Capacitance - Core Exercise Sheets", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Physics: [Mathongo Official] Magnetic Effects of Current - JEE Main PYQ Tracker", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Physics: [Resonance Material] Electromagnetic Induction (EMI) & AC - Solved PDF Module", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Physics: [Vedantu Material] Kinematics 1D & 2D - Step-by-Step Theory & Practice PDF", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Physics: [Allen Material] Laws of Motion & Friction - Level 1 & Level 2 Sheets", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Physics: [Mathongo Official] Work, Energy & Power - Chapterwise PYQs & Solution Links", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Physics: [Physics Wallah / PW] Rotational Motion - System of Particles Advanced Practice Set", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Physics: [Vedantu Material] Thermodynamics & Kinetic Theory of Gases - Revision Modules", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Physics: [Mathongo Official] Modern Physics (Dual Nature & Atoms) - High Weightage PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+
+        { "Input": "Chemistry: [Mathongo Official] Mole Concept & Stoichiometry - Basic to Advanced PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Chemistry: [Allen Material] Atomic Structure - Quantum Numbers & Bohr Model Sheets", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Chemistry: [Resonance Material] Chemical Equilibrium & Ionic Equilibrium - Solved Modules", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Chemistry: [Vedantu Material] Solutions & Colligative Properties - High-Yield Practice PDF", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Chemistry: [Physics Wallah / PW] Chemical Kinetics & Electrochemistry - DPP Collection", "Link": "https://www.vedantu.com/jee-main/study-material" },
+        { "Input": "Chemistry: [Mathongo Official] General Organic Chemistry (GOC) - Must-Solve Chapterwise PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Chemistry: [Allen Material] Hydrocarbons (Alkanes, Alkenes, Alkynes) - Mechanism & Reaction Sheets", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Chemistry: [Resonance Material] Alkyl Halides & Alcohols - Organic Conversion Question Bank", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+        { "Input": "Chemistry: [Mathongo Official] Coordination Compounds - d & f Block Element Chapterwise PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
+        { "Input": "Chemistry: [Vedantu Material] p-Block Elements & Periodic Table - Complete Inorganic Revision Sheet", "Link": "https://www.vedantu.com/jee-main/study-material" }
+    ];
+
+    let practiceData = [...staticData];
+
+    // Function to fetch data dynamically from Google Sheet
+    async function loadSheetData() {
+        if (!SHEET_ID || SHEET_ID === 'YOUR_GOOGLE_SHEET_ID_HERE') return;
+
+        const sheetUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+
+        try {
+            const res = await fetch(sheetUrl);
+            const text = await res.text();
             
-            // Pre-populated real-world JEE Prep Materials dataset
+            // Extract valid JSON from Google's response string
+            const json = JSON.parse(text.substring(47, text.length - 2));
+            const rows = json.table.rows;
 
-            // PHYSICS
-            { "Input": "Physics: Electrostatics - Level 1 Practice Sheet", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
-            { "Input": "Physics: Electrostatics - HC Verma Chapterwise Solutions", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Physics: Kinematics & Mechanics - Complete Revision Module", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Physics: Unit & Dimensions - Past Year Practice Set", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
-            { "Input": "Physics: Magnetism & EMI - Multi-Concept Advanced Problems", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Physics: Thermodynamics - Daily Practice Paper (DPP)", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
+            const fetchedData = rows.map(row => {
+                return {
+                    Input: row.c[0] ? row.c[0].v : "",
+                    Link: row.c[1] ? row.c[1].v : "#"
+                };
+            }).filter(item => item.Input && item.Link !== "#");
 
-            // CHEMISTRY
-            { "Input": "Chemistry: Chemical Bonding & Molecular Structure - Sheet 1", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Chemistry: Periodic Table & Representative Elements - Revision Guide", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Chemistry: Mole Concept & Gaseous State - Mock Paper", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
-            { "Input": "Chemistry: Coordination Compounds & d-Block - Advanced DPP", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
-            { "Input": "Chemistry: Organic Chemistry Hydrocarbons - Practice Module", "Link": "https://www.vedantu.com/jee-main/study-material" },
-
-            // MATHEMATICS
-            { "Input": "Mathematics: Sets, Relations & Functions - JEE Main PYQ Tracker", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
-            { "Input": "Mathematics: Quadratic Equations & Complex Numbers - Level 2", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Mathematics: Limits, Continuity & Differentiability - Complete Notes", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Mathematics: Integral Calculus (Definite & Indefinite) - Advanced Sheet", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
-            { "Input": "Mathematics: Vectors & 3D Geometry - High-Yield Solved Problems", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Mathematics: Probability & Matrices - Yearwise Exam Practice", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
-            // Mega JEE Preparation Dataset (Mathongo PYQs, Coaching Modules & PDFs)
-            // ==========================================
-            // MATHEMATICS (Mathongo PYQs & Sheets)
-            // ==========================================
-            { "Input": "Maths: [Mathongo Official] Matrices & Determinants - Chapterwise PYQ Sheet PDF", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Maths: [Mathongo Official] Quadratic Equations - Yearwise Past Year Questions", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Maths: [Mathongo Official] Sequences & Series - High Yield JEE Main PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Maths: [Mathongo Official] Complex Numbers - JEE Advanced Level Practice Set", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
-            { "Input": "Maths: [Mathongo Official] Limits, Continuity & Differentiability - Chapterwise PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Maths: [Mathongo Official] Definite Integration & Area Under Curve - Advanced Sheet", "Link": "https://www.mathongo.com/jee-advanced-practice-sheets-dpps" },
-            { "Input": "Maths: [Mathongo Official] Vectors & 3D Geometry - Most Repeated PYQs Pack", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Maths: [Mathongo Official] Probability & Statistics - Formulas & PYQ Guide", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Maths: [Allen Material] Coordinate Geometry (Straight Lines & Circles) - Modules & Exercises", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Maths: [Resonance Material] Permutations & Combinations - Rank Booster Question Bank", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-
-            // ==========================================
-            // PHYSICS (Coaching Modules & Question Banks)
-            // ==========================================
-            { "Input": "Physics: [Physics Wallah / PW] Electrostatics - Complete Notes & Daily Practice Paper (DPP)", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Physics: [Allen Material] Current Electricity & Capacitance - Core Exercise Sheets", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Physics: [Mathongo Official] Magnetic Effects of Current - JEE Main PYQ Tracker", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Physics: [Resonance Material] Electromagnetic Induction (EMI) & AC - Solved PDF Module", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Physics: [Vedantu Material] Kinematics 1D & 2D - Step-by-Step Theory & Practice PDF", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Physics: [Allen Material] Laws of Motion & Friction - Level 1 & Level 2 Sheets", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Physics: [Mathongo Official] Work, Energy & Power - Chapterwise PYQs & Solution Links", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Physics: [Physics Wallah / PW] Rotational Motion - System of Particles Advanced Practice Set", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Physics: [Vedantu Material] Thermodynamics & Kinetic Theory of Gases - Revision Modules", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Physics: [Mathongo Official] Modern Physics (Dual Nature & Atoms) - High Weightage PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-
-            // ==========================================
-            // CHEMISTRY (Organic, Inorganic & Physical)
-            // ==========================================
-            { "Input": "Chemistry: [Mathongo Official] Mole Concept & Stoichiometry - Basic to Advanced PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Chemistry: [Allen Material] Atomic Structure - Quantum Numbers & Bohr Model Sheets", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Chemistry: [Resonance Material] Chemical Equilibrium & Ionic Equilibrium - Solved Modules", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Chemistry: [Vedantu Material] Solutions & Colligative Properties - High-Yield Practice PDF", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Chemistry: [Physics Wallah / PW] Chemical Kinetics & Electrochemistry - DPP Collection", "Link": "https://www.vedantu.com/jee-main/study-material" },
-            { "Input": "Chemistry: [Mathongo Official] General Organic Chemistry (GOC) - Must-Solve Chapterwise PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Chemistry: [Allen Material] Hydrocarbons (Alkanes, Alkenes, Alkynes) - Mechanism & Reaction Sheets", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Chemistry: [Resonance Material] Alkyl Halides & Alcohols - Organic Conversion Question Bank", "Link": "https://www.testprepkart.com/jee/blog/pdf-download-jee-main-free-study-material-and-topic-wise-notes" },
-            { "Input": "Chemistry: [Mathongo Official] Coordination Compounds - d & f Block Element Chapterwise PYQs", "Link": "https://www.mathongo.com/jee-main/crash-course" },
-            { "Input": "Chemistry: [Vedantu Material] p-Block Elements & Periodic Table - Complete Inorganic Revision Sheet", "Link": "https://www.vedantu.com/jee-main/study-material" }
-                                                                                                                                                           
-                                                                                            
-        ];
-
-        const searchInput = document.getElementById('search-input');
-        const resultsContainer = document.getElementById('results-container');
-        const resultsList = document.getElementById('results-list');
-        const noResults = document.getElementById('no-results');
-
-        // Listen for input events (fires instantly on typing)
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-
-            // Clear previous results
-            resultsList.innerHTML = '';
-
-            // If input is empty, hide lists and exit
-            if (query === '') {
-                resultsContainer.classList.add('hidden');
-                noResults.classList.add('hidden');
-                return;
+            if (fetchedData.length > 0) {
+                // Prepend live Google Sheet entries so new links display first
+                practiceData = [...fetchedData, ...staticData];
             }
+        } catch (error) {
+            console.warn("Could not fetch Google Sheet data, using static dataset instead.", error);
+        }
+    }
 
-            // Filter data based on "Input" key matching the query
-            const filteredData = practiceData.filter(item =>
-                item.Input.toLowerCase().includes(query)
-            );
+    // Call fetch function when script runs
+    loadSheetData();
 
-            if (filteredData.length > 0) {
-                // Show results container, hide 'no results'
-                resultsContainer.classList.remove('hidden');
-                noResults.classList.add('hidden');
+    // UI Elements
+    const searchInput = document.getElementById('search-input');
+    const resultsContainer = document.getElementById('results-container');
+    const resultsList = document.getElementById('results-list');
+    const noResults = document.getElementById('no-results');
 
-                // Populate the numbered list
-                filteredData.forEach(item => {
-                    const li = document.createElement('li');
-                    li.className = "pl-2 py-1.5 hover:bg-slate-50 rounded-lg transition-colors group";
+    // Search Event Listener
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
 
-                    // Anchor tag styled to look professional
-                    const a = document.createElement('a');
-                    a.href = item.Link;
-                    a.target = "_blank"; // Opens link in a new tab
-                    a.textContent = item.Input;
-                    a.className = "text-blue-600 font-medium hover:text-indigo-600 hover:underline inline-block";
+        // Clear previous results
+        resultsList.innerHTML = '';
 
-                    li.appendChild(a);
-                    resultsList.appendChild(li);
-                });
-            } else {
-                // Hide results container, show 'no results'
-                resultsContainer.classList.add('hidden');
-                noResults.classList.remove('hidden');
-            }
-        });
-    </script>
+        // If input is empty, hide lists and exit
+        if (query === '') {
+            resultsContainer.classList.add('hidden');
+            noResults.classList.add('hidden');
+            return;
+        }
+
+        // Filter data matching the query
+        const filteredData = practiceData.filter(item =>
+            item.Input.toLowerCase().includes(query)
+        );
+
+        if (filteredData.length > 0) {
+            resultsContainer.classList.remove('hidden');
+            noResults.classList.add('hidden');
+
+            filteredData.forEach(item => {
+                const li = document.createElement('li');
+                li.className = "pl-2 py-1.5 hover:bg-slate-50 rounded-lg transition-colors group";
+
+                const a = document.createElement('a');
+                a.href = item.Link;
+                a.target = "_blank";
+                a.textContent = item.Input;
+                a.className = "text-blue-600 font-medium hover:text-indigo-600 hover:underline inline-block";
+
+                li.appendChild(a);
+                resultsList.appendChild(li);
+            });
+        } else {
+            resultsContainer.classList.add('hidden');
+            noResults.classList.remove('hidden');
+        }
+    });
+</script>
 </body>
 
 </html>
-
-}
-})
-}
-}
-})
-}
